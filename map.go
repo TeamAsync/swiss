@@ -256,7 +256,7 @@ func (m *Map[K, V]) Clear() {
 
 func (m *Map[K, V]) MarshalJSON() ([]byte, error) {
 	temp := make(map[K]V, m.Count())
-	b.data.Iter(func(key K, value V) bool {
+	m.data.Iter(func(key K, value V) bool {
 		temp[key] = value
 		return true
 	})
