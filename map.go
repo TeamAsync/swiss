@@ -253,6 +253,29 @@ func (m *Map[K, V]) Clear() {
 	m.resident, m.dead = 0, 0
 }
 
+func (m *Map[K, V]) MarshalJSON() ([]byte, error) {
+	temp := make(map[K]V, m.Count())
+	b.data.Iter(func(key K, value V) bool {
+		temp[key] = value
+		return true
+	})
+	return json.Marshal(temp)
+}
+
+func (m *Map[K, V]) UnmarshalJSON(data []byte) error {
+	temp := make(map[K]V)
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	for key, value := range temp {
+		m.Put(key, value)
+	}
+
+	return nil
+}
+
+
 // Count returns the number of elements in the Map.
 func (m *Map[K, V]) Count() int {
 	return int(m.resident - m.dead)
