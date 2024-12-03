@@ -16,6 +16,7 @@ package swiss
 
 import (
 	"github.com/dolthub/maphash"
+	"encoding/json"
 )
 
 const (
