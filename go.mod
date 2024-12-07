@@ -1,4 +1,4 @@
-module github.com/teamasync/swiss
+module github.com/TeamAsync/swiss
 
 go 1.18
 
