@@ -15,8 +15,9 @@
 package swiss
 
 import (
-	"github.com/dolthub/maphash"
 	"encoding/json"
+
+	"github.com/dolthub/maphash"
 )
 
 const (
@@ -258,7 +259,7 @@ func (m *Map[K, V]) MarshalJSON() ([]byte, error) {
 	temp := make(map[K]V, m.Count())
 	m.Iter(func(key K, value V) bool {
 		temp[key] = value
-		return true
+		return false
 	})
 	return json.Marshal(temp)
 }
@@ -275,7 +276,6 @@ func (m *Map[K, V]) UnmarshalJSON(data []byte) error {
 
 	return nil
 }
-
 
 // Count returns the number of elements in the Map.
 func (m *Map[K, V]) Count() int {
